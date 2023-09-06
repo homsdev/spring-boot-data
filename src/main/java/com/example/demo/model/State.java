@@ -1,28 +1,56 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class State implements Serializable {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-	private Long id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "state")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class State extends Base implements Serializable {
+
+	private static final long serialVersionUID = -2234751957865474158L;
+
+	@NotBlank
+	@Column(name = "code", nullable = false)
 	private String code;
-	private String name;
-	private Boolean enabled;
 
-	public State(Long id, String code, String name, Boolean enabled) {
+	@NotBlank
+	@Column(name = "name", nullable = false)
+	private String name;
+
+	@NotBlank
+	@Column(name = "enabled", nullable = false)
+	private Boolean enabled = Boolean.TRUE;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "country_id", nullable = false, updatable = false, insertable = false)
+	private Country country;
+	
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "state")
+	private List<City> cities;
+
+	public State() {
 		super();
-		this.id = id;
+	}
+
+	public State(String code, String name, Boolean enabled, Country country) {
+		super();
 		this.code = code;
 		this.name = name;
 		this.enabled = enabled;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+		this.country = country;
 	}
 
 	public String getCode() {
@@ -47,6 +75,14 @@ public class State implements Serializable {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
 }

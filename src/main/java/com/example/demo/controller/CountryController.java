@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +17,21 @@ public class CountryController {
 
 	private final CountryService countryService;
 
-	@Autowired
 	public CountryController(CountryService countryService) {
 		super();
 		this.countryService = countryService;
 	}
 
+	/*
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<CountryDTO> getCountryById(@PathVariable Long id) {
 		return new ResponseEntity<>(countryService.getCountryById(id),HttpStatus.OK);
+	}*/
+	
+	@GetMapping(value = "{id}")
+	public ResponseEntity<CountryDTO> getCountryWithoutCurrency(@PathVariable Long id) {
+		return new ResponseEntity<>(countryService.getCountryWhitoutStatesById(id),HttpStatus.OK);
 	}
+
 
 }

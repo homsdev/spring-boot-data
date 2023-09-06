@@ -21,3 +21,5 @@ spring:
   jpa:
     show-sql: false 
     generate-ddl: false
+    hibernate:
+      ddl-auto: validate #Indicates that the application needs to check if the entity map structure matches the table in the DB

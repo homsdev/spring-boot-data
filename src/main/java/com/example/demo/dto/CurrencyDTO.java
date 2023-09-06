@@ -1,18 +1,28 @@
 package com.example.demo.dto;
 
-public class CurrencyDTO {
+import java.io.Serializable;
+
+public class CurrencyDTO implements Serializable {
+	
+	private static final long serialVersionUID = -3541319811043496467L;
+	
 	private Long id;
 	private String code;
+	private String symbol;
 	private String description;
-	private Boolean enable;
+	private Boolean enabled;
 	private Integer decimalPlaces;
+	private AuditDTO audit;//Variable name should be equal to name in Entity
+	
+	public CurrencyDTO() {}
 
-	public CurrencyDTO(Long id, String code, String description, Boolean enable, Integer decimalPlaces) {
+	public CurrencyDTO(Long id, String code, String symbol, String description, Boolean enabled, Integer decimalPlaces) {
 		super();
 		this.id = id;
 		this.code = code;
+		this.symbol = symbol;
 		this.description = description;
-		this.enable = enable;
+		this.enabled = enabled;
 		this.decimalPlaces = decimalPlaces;
 	}
 
@@ -40,12 +50,12 @@ public class CurrencyDTO {
 		this.description = description;
 	}
 
-	public Boolean getEnable() {
-		return enable;
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setEnable(Boolean enable) {
-		this.enable = enable;
+	public void setEnabled(Boolean enable) {
+		this.enabled = enable;
 	}
 
 	public Integer getDecimalPlaces() {
@@ -56,4 +66,19 @@ public class CurrencyDTO {
 		this.decimalPlaces = decimalPlaces;
 	}
 
+	public AuditDTO getAudit() {
+		return audit;
+	}
+
+	public void setAudit(AuditDTO audit) {
+		this.audit = audit;
+	}
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}
 }

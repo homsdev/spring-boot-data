@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.CurrencyDTO;
 import com.example.demo.service.CurrencyService;
 
-@RestController()
+@RestController
 @RequestMapping("/currency")
 public class CurrencyController {
 
